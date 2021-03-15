@@ -21,8 +21,7 @@ stages:
   # 需要符合Rancher版本
   - runScriptConfig:
       image: rancher/cli2:v2.4.5
-      #shellScript: ${create-env-data}
-      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && "rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env  --from-env-file=iiidevops/app.env"
+      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env  --from-env-file=iiidevops/app.env
     # Rancher管理授權連線
     envFrom:
     - sourceKey: API_TOKEN
@@ -31,9 +30,6 @@ stages:
     - sourceKey: rancher-url
       sourceName: rancher
       targetKey: rancher_url
-    - sourceKey: command
-      sourceName: pipeline-env-configmap
-      targetKey: create-env-data
 - name: Test--Checkmarx source code scan
   steps:
   - applyAppConfig:
