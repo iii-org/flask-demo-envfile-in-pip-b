@@ -22,7 +22,7 @@ stages:
   - runScriptConfig:
       image: rancher/cli2:v2.4.5
       #shellScript: ${create-env-data}
-      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify; rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env  --from-env-file=iiidevops/app.env
+      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env  --from-env-file=iiidevops/app.env
     env:
       CICD_GIT_REPO_NAME: ${CICD_GIT_REPO_NAME}
       CICD_GIT_BRANCH: ${CICD_GIT_BRANCH}
