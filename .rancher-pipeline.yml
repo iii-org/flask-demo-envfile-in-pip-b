@@ -20,7 +20,7 @@ stages:
         - develop
   # 需要符合Rancher版本
   - runScriptConfig:
-      image: rancher/cli:2.4.5
+      image: rancher/cli2:2.4.5
       shellScript: login ${rancher_url} -t ${rancher_api_token} --skip-verify;
     # Rancher管理授權連線
     envFrom:
