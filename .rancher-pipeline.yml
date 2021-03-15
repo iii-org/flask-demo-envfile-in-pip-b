@@ -22,7 +22,7 @@ stages:
   - runScriptConfig:
       image: iiiorg/rancher-cli:v2.4.6
       #shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env  --from-env-file=iiidevops/app.env
-      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher delete configmap -n ${CICD_GIT_REPO_NAME} all & rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env --from-env-file=iiidevops/app.env -n ${CICD_GIT_REPO_NAME}
+      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher kubectl delete configmap -n ${CICD_GIT_REPO_NAME} all & rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env --from-env-file=iiidevops/app.env -n ${CICD_GIT_REPO_NAME}
     # Rancher管理授權連線
     envFrom:
     - sourceKey: API_TOKEN
