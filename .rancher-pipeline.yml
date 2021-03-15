@@ -23,7 +23,10 @@ stages:
       image: iiiorg/rancher-cli:v2.4.6
       #shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env  --from-env-file=iiidevops/app.env
       #shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher kubectl delete --all configmap -n ${CICD_GIT_REPO_NAME} && rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env --from-env-file=iiidevops/app.env -n ${CICD_GIT_REPO_NAME}
-      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher kubectl delete configmap -n ${CICD_GIT_REPO_NAME} {CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env && rancher kubectl create configmap ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env --from-env-file=iiidevops/app.env -n ${CICD_GIT_REPO_NAME}
+      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify && rancher kubectl delete configmap -n ${REPO_NAME} {REPO_NAME}-${BRANCH}-env && rancher kubectl create configmap ${REPO_NAME}-${BRANCH}-env --from-env-file=iiidevops/app.env -n ${REPO_NAME}
+    env:
+      REPO_NAME: ${CICD_GIT_REPO_NAME}
+      BRANCH: ${CICD_GIT_BRANCH}
     # Rancher管理授權連線
     envFrom:
     - sourceKey: API_TOKEN
