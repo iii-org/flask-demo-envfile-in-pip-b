@@ -18,6 +18,18 @@ stages:
         include:
         - master
         - develop
+  # 需要符合Rancher版本
+  - runScriptConfig:
+      image: rancher/cli:2.4.5
+      shellScript: login ${rancher_url} -t ${rancher_api_token} --skip-verify;
+    # Rancher管理授權連線
+    envFrom:
+    - sourceKey: API_TOKEN
+      sourceName: pipeline-api-key
+      targetKey: rancher_api_token
+    - sourceKey: rancher-url
+      sourceName: rancher
+      targetKey: rancher_url
 - name: Test--Checkmarx source code scan
   steps:
   - applyAppConfig:
